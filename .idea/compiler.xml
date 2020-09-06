@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DHLG_SSM_dao" />
+        <module name="DHLG_SSM_domain" />
+        <module name="DHLG_SSM_services" />
+        <module name="DHLG_SSM_utils" />
+        <module name="DHLG_SSM_web" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
