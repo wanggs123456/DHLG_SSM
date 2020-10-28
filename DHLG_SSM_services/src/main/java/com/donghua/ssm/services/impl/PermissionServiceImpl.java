@@ -3,6 +3,8 @@ package com.donghua.ssm.services.impl;
 import com.donghua.ssm.dao.IPermissionDao;
 import com.donghua.ssm.domain.Permission;
 import com.donghua.ssm.services.IPermissionService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,8 @@ public class PermissionServiceImpl implements IPermissionService {
     @Autowired
     private IPermissionDao permissionDao;
     @Override
-    public List<Permission> findAll() {
+    public List<Permission> findAll(int page, int pageSize) {
+        PageHelper.startPage(page,pageSize);
         return permissionDao.findAll();
     }
 

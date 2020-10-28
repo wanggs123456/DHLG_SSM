@@ -4,7 +4,6 @@ import com.donghua.ssm.domain.Orders;
 import com.donghua.ssm.services.IOrdersService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,4 +50,19 @@ public class OrdersController {
         mv.setViewName("orders-show");
         return  mv;
     }
+
+    @RequestMapping("/deleteOrder.do")
+    public String deleteOrder(@RequestParam(name = "id",required = true) String orderId){
+        ordersService.deleteOrder(orderId);
+        return "redirect:findAll.do";
+    }
+
+    @RequestMapping("/save.do")
+    public String save(Orders orders){
+        ordersService.save(orders);
+        return "redirect:findAll.do";
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.donghua.ssm.domain;
 
 import com.donghua.ssm.utils.DateUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 public class Orders implements Serializable {
     private String id;
     private String orderNum;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date orderTime;
     private String orderTimeStr;
     private int orderStatus;

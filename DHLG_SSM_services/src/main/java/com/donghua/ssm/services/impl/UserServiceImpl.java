@@ -4,6 +4,7 @@ import com.donghua.ssm.dao.IUserDao;
 import com.donghua.ssm.domain.Role;
 import com.donghua.ssm.domain.UserInfo;
 import com.donghua.ssm.services.IUserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.donghua.ssm.utils.BCryptPasswordEncoderUtils.bCryptPasswordEncoder;
 
 
 @Service("userService")
@@ -45,7 +44,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<UserInfo> findAll() {
+    public List<UserInfo> findAll(Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
         return userDao.findAll();
     }
 
@@ -54,8 +54,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void save(UserInfo userInfo) {
         //对密码加密
-
-       userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
+        userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
         userDao.save(userInfo);
     }
 
@@ -76,5 +75,11 @@ public class UserServiceImpl implements IUserService {
         for(String roleId:roleIds){
             userDao.addRoleToUser(userId,roleId);
         }
+    }
+
+    @Override
+    public void deleteUser(String userId) {
+        userDao.deleteUsers_Role(userId);
+        userDao.deleteUser(userId);
     }
 }

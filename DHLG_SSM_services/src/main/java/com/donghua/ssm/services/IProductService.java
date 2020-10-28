@@ -8,4 +8,6 @@ public interface IProductService {
     public List<Product> findall(int page,int size);
 
     void save(Product product);
+
+    void deleteProduct(String productId);
 }

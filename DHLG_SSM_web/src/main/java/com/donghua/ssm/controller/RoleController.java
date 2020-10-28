@@ -3,6 +3,7 @@ package com.donghua.ssm.controller;
 import com.donghua.ssm.domain.Permission;
 import com.donghua.ssm.domain.Role;
 import com.donghua.ssm.services.IRoleService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +19,12 @@ public class RoleController {
     private IRoleService roleService;
 
     @RequestMapping("/findAll.do")
-    public ModelAndView findAll(){
+    public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1") Integer page,
+                                @RequestParam(name = "size",required = true,defaultValue = "4") Integer pageSize){
         ModelAndView mv=new ModelAndView();
-        List<Role> roleList= roleService.findAll();
-        mv.addObject("roleList",roleList);
+        List<Role> roleList= (List<Role>) roleService.findAll(page,pageSize);
+        PageInfo pageInfo=new PageInfo(roleList);
+        mv.addObject("pageInfo",pageInfo);
         mv.setViewName("role-list");
         return mv;
     }

@@ -42,4 +42,9 @@ public interface IUserDao {
 
     @Insert("insert into users_role (userId, roleId) values(#{userId},#{roleId})")
     void addRoleToUser(@Param("userId") String userId,@Param("roleId")String roleId);
+
+    @Delete("delete from users where id=#{userId}")
+    void deleteUser(String userId);
+    @Delete("delete from users_role where userId=#{userId}")
+    void deleteUsers_Role(String userId);
 }

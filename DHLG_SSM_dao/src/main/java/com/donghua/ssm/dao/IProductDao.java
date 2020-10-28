@@ -28,4 +28,7 @@ public interface IProductDao {
     @Insert("insert into product(productNum,productName,cityName,departureTime,productPrice,productDesc,productStatus) values(#{productNum},#{productName},#{cityName},#{departureTime},#{productPrice},#{productDesc},#{productStatus})")
     //@Insert("insert into product(productNum,productName,cityName,productPrice,departureTime,productDesc,productStatus) values(#{productNum},#{productName},#{cityName},#{productPrice},#{departureTime},#{productDesc},#{productStatus})")
     void save(Product product);
+
+    @Delete("delete from product where id=#{productId}")
+    void deleteProduct(String productId);
 }

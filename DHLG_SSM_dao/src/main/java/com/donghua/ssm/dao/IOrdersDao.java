@@ -36,4 +36,12 @@ public interface IOrdersDao {
             @Result(property = "travellers",column = "id",javaType = java.util.List.class, many = @Many(select = "com.donghua.ssm.dao.ITravellerDao.findByOrdersId"))
     })
     Orders findById(String ordersId);
+
+    @Delete("delete from orders where id=#{orderId}")
+    void deleteOrder(String orderId);
+    @Delete("delete from order_traveller where orderId=#{orderId}")
+    void deleteOrder_travellerByOrderId(String orderId);
+
+    @Insert("insert into orders(orderNum,orderTime,orderStatus,peopleCount,payType,orderDesc) values(#{orderNum},#{orderTime},#{orderStatus},#{peopleCount},#{payType},#{orderDesc})")
+    void save(Orders orders);
 }

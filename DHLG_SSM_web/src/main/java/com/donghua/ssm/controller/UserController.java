@@ -4,6 +4,7 @@ package com.donghua.ssm.controller;
 import com.donghua.ssm.domain.Role;
 import com.donghua.ssm.domain.UserInfo;
 import com.donghua.ssm.services.IUserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -27,13 +28,17 @@ public class UserController {
     }
     @RequestMapping("/findAll.do")
     //@PreAuthorize("hasRole('Role_ADMIN')") 第三种
-    public ModelAndView findAll(){
+    public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1") Integer page,
+                                @RequestParam(name = "size",required = true,defaultValue = "4") Integer pageSize){
         ModelAndView mv=new ModelAndView();
-        List<UserInfo> userList=userService.findAll();
-        mv.addObject("userList",userList);
+        List<UserInfo> userList= (List<UserInfo>) userService.findAll(page,pageSize);
+        PageInfo pageInfo=new PageInfo(userList);
+        mv.addObject("pageInfo",pageInfo);
         mv.setViewName("user-list");
         return mv;
     }
+
+
 
     @RequestMapping("/findById.do")
     public ModelAndView findById(String id){
@@ -61,4 +66,18 @@ public class UserController {
         userService.addRoleToUser(userId,roleIds);
         return "redirect:findAll.do";
     }
+
+    /*@RequestMapping("/deleteOrder.do")
+    public String deleteOrder(@RequestParam(name = "id",required = true) String orderId){
+        ordersService.deleteOrder(orderId);
+        return "redirect:findAll.do";
+    }*/
+
+    @RequestMapping("/deleteUser.do")
+    public String deleteUser(@RequestParam(name = "id",required = true) String userId){
+        userService.deleteUser(userId);
+        return "redirect:findAll.do";
+    }
+
+
 }

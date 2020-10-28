@@ -33,13 +33,13 @@
 							class="img-circle" alt="User Image"></li>
 
 						<!-- Menu Footer-->
-						<li class="user-footer">
-							<div class="pull-left">
+						<li class="user-footer" >
+							<%--<div class="pull-left">
 								<a href="#" class="btn btn-default btn-flat">修改密码</a>
-							</div>
+							</div>--%>
 							<div class="pull-right">
 								<a href="${pageContext.request.contextPath}/logout.do"
-									class="btn btn-default btn-flat">注销</a>
+									class="btn btn-default btn-flat" >注销</a>
 							</div>
 						</li>
 					</ul></li>

@@ -4,7 +4,7 @@ import com.donghua.ssm.dao.IRoleDao;
 import com.donghua.ssm.domain.Permission;
 import com.donghua.ssm.domain.Role;
 import com.donghua.ssm.services.IRoleService;
-import org.apache.ibatis.annotations.Select;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,8 @@ public class RoleServiceImpl implements IRoleService {
     @Autowired
     private IRoleDao roleDao;
     @Override
-    public List<Role> findAll() {
+    public List<Role> findAll(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
         return  roleDao.findAll();
 
     }

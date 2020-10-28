@@ -26,4 +26,9 @@ public class ProductServiceImpl implements IProductService {
     public void save(Product product) {
         productDao.save(product);
     }
+
+    @Override
+    public void deleteProduct(String productId) {
+        productDao.deleteProduct(productId);
+    }
 }

@@ -6,7 +6,7 @@ import com.donghua.ssm.domain.Role;
 import java.util.List;
 
 public interface IRoleService {
-    public List<Role> findAll();
+    public List<Role> findAll(Integer page, Integer pageSize);
 
     void save(Role role);
 

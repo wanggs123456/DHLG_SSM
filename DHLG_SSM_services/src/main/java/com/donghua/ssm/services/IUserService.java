@@ -7,14 +7,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface IUserService extends UserDetailsService {
-    public List<UserInfo> findAll();
+    public List<UserInfo> findAll(Integer page, Integer pageSize);
 
     void save(UserInfo userInfo);
 
     UserInfo findById(String id);
-
-
     List<Role> findOtherRoles(String userId);
 
     void addRoleToUser(String userId,String[] roleIds);
+
+    void deleteUser(String userId);
+
 }

@@ -2,7 +2,9 @@ package com.donghua.ssm.controller;
 
 import com.donghua.ssm.domain.Permission;
 import com.donghua.ssm.services.IPermissionService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,10 +19,12 @@ public class PermissionController {
     @Autowired
     private IPermissionService permissionService;
     @RequestMapping("/findAll.do")
-    public ModelAndView findAll(){
+    public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1") int page,
+                                @RequestParam(name = "size",required = true,defaultValue = "4") int pageSize){
         ModelAndView mv=new ModelAndView();
-        List<Permission> permissionList= permissionService.findAll();
-        mv.addObject("permissionList",permissionList);
+        List<Permission> permissionList= (List<Permission>) permissionService.findAll(page,pageSize);
+        PageInfo pageInfo=new PageInfo(permissionList);
+        mv.addObject("pageInfo",pageInfo);
         mv.setViewName("permission-list");
         return mv;
     }

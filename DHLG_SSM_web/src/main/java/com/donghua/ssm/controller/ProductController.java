@@ -29,7 +29,8 @@ public class ProductController {
     }*/
     @RequestMapping("/findAll.do")
     @RolesAllowed("ADMIN")
-    public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1") int page, @RequestParam(name = "size",required = true,defaultValue = "4") int size){
+    public ModelAndView findAll(@RequestParam(name = "page",required = true,defaultValue = "1") int page,
+                                @RequestParam(name = "size",required = true,defaultValue = "4") int size){
         ModelAndView mv=new ModelAndView();
         List<Product> ps=productService.findall(page,size);
         PageInfo pageInfo=new PageInfo(ps);
@@ -44,4 +45,17 @@ public class ProductController {
         productService.save(product);
         return "redirect:findAll.do";
     }
+
+    /*@RequestMapping("/deleteOrder.do")
+    public String deleteOrder(@RequestParam(name = "id",required = true) String orderId){
+        ordersService.deleteOrder(orderId);
+        return "redirect:findAll.do";
+    }*/
+
+    @RequestMapping("/deleteProduct.do")
+    public String deleteProduct(@RequestParam(name = "id",required = true) String productId){
+        productService.deleteProduct(productId);
+        return "redirect:findAll.do";
+    }
+
 }
